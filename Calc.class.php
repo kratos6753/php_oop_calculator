@@ -56,6 +56,18 @@ class Calc implements ICalc {
 			return $calc_util;
 	}
 
+	public function median() {
+		$args = func_get_args();
+		$calc_util = $this->calc_utility($args);
+		if(is_array($calc_util)) {
+			list($num_args, $args) = $calc_util;
+			$this->counting_sort($args);
+			$median = $num_args & 1 ? $args[$num_args/2] : array($args[$num_args/2 -1], $args[$num_args/2]);
+			return $median;
+		}
+		return $calc_util;
+	}
+
 	private function check_numeric_array(array $some_array) {
 		$all_numeric = true;
 		$failed_index = -1;
